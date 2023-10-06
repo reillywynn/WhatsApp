@@ -6,6 +6,11 @@ import * as Font from "expo-font";
 import "react-native-gesture-handler";
 
 import AppNavigator from "./navigation/AppNavigator";
+import { LogBox } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+
+LogBox.ignoreLogs(["You are initializing Firebase Auth"]);
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,9 +59,11 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider onLayout={onLayout}>
-      <AppNavigator />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider onLayout={onLayout}>
+        <AppNavigator />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
